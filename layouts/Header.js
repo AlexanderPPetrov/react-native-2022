@@ -5,7 +5,7 @@ import { navigationRef } from "../RootNavigation";
 import { useNavigation } from '@react-navigation/native';
 import { screens } from "../screens";
 export default function Header(props) {
-    
+
     const navigation = useNavigation();
     const currentRoute = navigationRef.current?.getCurrentRoute().name;
 
@@ -14,6 +14,7 @@ export default function Header(props) {
     }
     function getTitle() {
         if(currentRoute) {
+            //TODO check warning require cycle
             return screens.find(screen => screen.name === currentRoute).title
         }
         return null;
@@ -22,13 +23,15 @@ export default function Header(props) {
             <View style={styles.container}>
                 <View style={styles.iconLeft}>
                     <TouchableOpacity onPress={() => toggleDrawer()}>
-                        <Ionicons name="ios-menu-outline" size={24} color="white" />
+                        <Ionicons name="ios-menu-outline" size={32} color="white" />
                     </TouchableOpacity>
                 </View>
                 <View style={styles.textContainer}>
-                    <Text style={styles.text}>
-                        {getTitle()}
-                    </Text>
+                    <View style={styles.textWrapper}>
+                        <Text style={styles.text}>
+                            {getTitle()}
+                        </Text>
+                    </View>
                 </View>
                 <View style={styles.iconRight}>
 
@@ -40,17 +43,29 @@ export default function Header(props) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    height: 55,
+    height: 60,
   },
   iconLeft: {
-      padding: 15,
+    padding: 15,
+    width: 50,
+  },
+  iconRight: {
+    padding: 15,
+    width: 50,
   },
   textContainer: {
-      padding: 15,
+    padding: 15,
+    flex: 1,
+    alignItems: 'center',
   },
   text: {
       fontSize: 18,
       color: colors.textPrimary,
       fontWeight: 'bold',
+  },
+  textWrapper: {
+      borderBottomColor: colors.textPrimary,
+      borderBottomWidth: 3,
+      paddingBottom: 5,
   }
 });

@@ -1,15 +1,16 @@
-import {ScrollView, StyleSheet} from "react-native";
+import {View, StyleSheet} from "react-native";
 
 export default function Body (props) {
     return (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
             {props.children}
-        </ScrollView>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        padding: 5,
+        padding: 16,
+        flex: 1,
     }
 })
