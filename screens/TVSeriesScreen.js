@@ -1,12 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
+import DefaultLayout from "../layouts/Default";
 
 export default function TVSeriesScreen() {
   return (
-    <>
-    <View style={styles.container}>
-        <Text>Movies Screen</Text>
-    </View>
-    </>
+    <DefaultLayout>
+      <View style={styles.container}>
+          <Text>Movies Screen</Text>
+      </View>
+    </DefaultLayout>
 
   );
 }
@@ -14,10 +15,5 @@ export default function TVSeriesScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    flexWrap: "wrap",
   },
 });

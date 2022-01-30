@@ -2,45 +2,23 @@ import DrawerItem from "./DrawerItem";
 import {StyleSheet, View, SafeAreaView, Image} from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import constants from "expo-constants";
-
+import { screens } from "../screens";
+import {colors} from "../colors";
 export default function DrawerContent(props) {
 
-    const drawerItems = [
-      {
-        title: 'Начало',
-        icon: 'home',
-        screen: 'Home',
-      },
-      {
-        title: 'Филми',
-        icon: 'movie',
-        screen: 'Movies',
-      },
-      {
-        title: 'Сериали',
-        icon: 'live-tv',
-        screen: 'TVSeries',
-      },
-      {
-        title: 'Настройки',
-        icon: 'settings',
-        screen: 'Settings',
-      },
-    ]
-
     function getDrawerItems() {
-      return drawerItems.map((item, index) => {
+      return screens.map((item, index) => {
         return <DrawerItem 
           key={index} 
           icon={item.icon}
-          screen={item.screen}
+          name={item.name}
           title={item.title}/>
       })
     }
     return  (
             <LinearGradient 
               style={styles.gradient}
-              colors={['#0286a2', '#005d78']}>
+              colors={[colors.primary, colors.primaryDark]}>
                 <View style={styles.container}>
                   <Image style={styles.logo} source={require('../assets/components/drawer.png')}></Image>
                   <View style={styles.menuContainer}>

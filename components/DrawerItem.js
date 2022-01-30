@@ -8,11 +8,10 @@ export default DrawerItem = (props) => {
         <TouchableOpacity
             style={[
                 styles.container, 
-                currentRoute === props.screen ? styles.containerActive : null,
+                currentRoute === props.name ? styles.containerActive : null,
             ]}
             onPress={() => {
-                console.log(navigationRef.current.getCurrentRoute())
-                navigate(props.screen);
+                navigate(props.name);
             }}
             >
             <MaterialIcons name={props.icon} color="white" size={22}/>

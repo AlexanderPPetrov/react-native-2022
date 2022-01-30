@@ -1,17 +1,14 @@
-import Header from "../components/Header";
-import {StyleSheet, View} from "react-native";
+import Header from "./Header";
+import Body from "./Body";
+import Container from "./Container";
 
 export default function Default(props) {
     return  (
-            <View style={styles.container}>
-                <Header/>
+            <Container>
+              <Header/>
+              <Body>
                 {props.children}
-            </View>
+              </Body>
+            </Container>
       );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
