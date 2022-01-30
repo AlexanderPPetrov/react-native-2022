@@ -4,26 +4,42 @@ import { colors } from "../colors";
 import { navigationRef } from "../RootNavigation";
 import { useNavigation } from '@react-navigation/native';
 import { screens } from "../screens";
+import { FontAwesome5 } from '@expo/vector-icons'; 
+import LoginForm from "../components/forms/LoginForm";
+import { useDispatch } from "react-redux";
+import { setLoginDialogOpened } from "../redux/actions";
+
 export default function Header(props) {
 
     const navigation = useNavigation();
     const currentRoute = navigationRef.current?.getCurrentRoute().name;
-
+    const dispatch = useDispatch();
+    
     function toggleDrawer() {
         navigation.toggleDrawer();
     }
+
     function getTitle() {
         if(currentRoute) {
             //TODO check warning require cycle
-            return screens.find(screen => screen.name === currentRoute).title
+            return ''
+            //return screens.find(screen => screen.name === currentRoute).title
         }
         return null;
     }
+
+    function openUserMenu() {
+        dispatch(setLoginDialogOpened(true));
+    }
+
     return  (
             <View style={styles.container}>
                 <View style={styles.iconLeft}>
                     <TouchableOpacity onPress={() => toggleDrawer()}>
-                        <Ionicons name="ios-menu-outline" size={32} color="white" />
+                        <Ionicons 
+                            name="ios-menu-outline" 
+                            size={32} 
+                            color={colors.textPrimary} />
                     </TouchableOpacity>
                 </View>
                 <View style={styles.textContainer}>
@@ -34,8 +50,14 @@ export default function Header(props) {
                     </View>
                 </View>
                 <View style={styles.iconRight}>
-
+                    <TouchableOpacity onPress={() => openUserMenu()}>
+                    <FontAwesome5 
+                        name="user-circle" 
+                        size={28} 
+                        color={colors.textPrimary} />
+                    </TouchableOpacity>
                 </View>
+                <LoginForm></LoginForm>
             </View>
       );
 }
@@ -47,11 +69,11 @@ const styles = StyleSheet.create({
   },
   iconLeft: {
     padding: 15,
-    width: 50,
+    width: 60,
   },
   iconRight: {
     padding: 15,
-    width: 50,
+    width: 60,
   },
   textContainer: {
     padding: 15,

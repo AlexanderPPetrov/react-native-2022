@@ -4,6 +4,8 @@ import MovieList from "../components/MovieList";
 import { useEffect, useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { getMovies, setMovies } from "../redux/actions";
+import Loader from "../components/Loader";
+import requestTypes from "../redux/request-types";
 
 const wait = (timeout) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
@@ -25,7 +27,6 @@ export default function MoviesScreen() {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        console.log('dispatch')
         dispatch(getMovies());
     }, [])
 
@@ -41,6 +42,7 @@ export default function MoviesScreen() {
         }>
             <MovieList/>
         </ScrollView>
+        <Loader requestName={requestTypes.GET_MOVIES}/>
     </DefaultLayout>
   );
 }
